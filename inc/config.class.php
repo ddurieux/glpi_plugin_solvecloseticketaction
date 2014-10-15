@@ -154,6 +154,28 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       echo "</td>";
       echo "</tr>";
 
+      echo "<tr>";
+      echo "<td colspan='2'>";
+      echo "</td>";
+      echo "<td>Supprimer les autres techniciens lorsque le technicien résoud le ticket&nbsp;:</td>";
+      echo "<td>";
+      $elements = array();
+      if ($entities_id == '0') {
+         $elements = array("+0" => __('No'),
+                           "+1" => __('Yes')
+                           );
+      } else {
+         $elements = array("NULL" => __('Inheritance of the parent entity'),
+                           "+0" => __('No'),
+                           "+1" => __('Yes')
+                           );
+      }
+      $value = (is_null($this->fields['deletetechsonsolve']) ? "NULL" : "+".$this->fields['deletetechsonsolve']);
+      $value = str_replace("++", "+", $value);
+      Dropdown::showFromArray("deletetechsonsolve", $elements, array('value' => $value));
+      echo "</td>";
+      echo "</tr>";
+
       $this->showFormButtons($options);
 
       return true;
@@ -232,6 +254,8 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
          }
          $createfollow = $psConfig->getValue("createfollowupwithsolve", $entities_id);
          $assigntech = $psConfig->getValue("assigntechsolveticket", $entities_id);
+         $deletetechsonsolve = $psConfig->getValue("deletetechsonsolve", $entities_id);
+         Toolbox::logDebug($deletetechsonsolve);
          if ($createfollow == '1'
                  && isset($item->input['solution'])) {
             $input = array();
@@ -252,7 +276,9 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
                if ($datau['users_id'] == $_SESSION['glpiID']) {
                   $create = 0;
                } else {
-                  $ticket_User->delete($datau);
+                  if ($deletetechsonsolve == '1') {
+                     $ticket_User->delete($datau);
+                  }
                }
             }
             if ($create == '1') {

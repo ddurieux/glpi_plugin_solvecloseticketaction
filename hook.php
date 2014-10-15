@@ -48,13 +48,14 @@ function plugin_solvecloseticketaction_install() {
    `entities_id` int(11) NOT NULL DEFAULT '0',
    `createfollowupwithsolve` varchar(255) DEFAULT NULL,
    `assigntechsolveticket` varchar(255) DEFAULT NULL,
+   `deletetechsonsolve` varchar(255) DEFAULT NULL,
    PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
    $DB->query($query);
 
    $query = "INSERT INTO `glpi_plugin_solvecloseticketaction_configs`
       (`id`, `entities_id`, `createfollowupwithsolve`, `assigntechsolveticket`)
-      VALUES (1, 0, '0', '0');";
+      VALUES (1, 0, '0', '0', '0');";
    $DB->query($query);
 
    return true;
