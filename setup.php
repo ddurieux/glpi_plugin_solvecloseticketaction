@@ -3,7 +3,7 @@
 /*
    ------------------------------------------------------------------------
    Plugin Solvecloseticketaction for GLPI
-   Copyright (C) 2014-2014 by the Plugin Solvecloseticketaction for David Durieux.
+   Copyright (C) 2014-2015 by the Plugin Solvecloseticketaction for David Durieux.
 
    https://
    ------------------------------------------------------------------------
@@ -31,7 +31,7 @@
    @author    David Durieux
    @co-author
    @comment
-   @copyright Copyright (c) 2014-2014 Plugin Solvecloseticketaction for David Durieux
+   @copyright Copyright (c) 2014-2015 Plugin Solvecloseticketaction for David Durieux
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
    @link      https://
