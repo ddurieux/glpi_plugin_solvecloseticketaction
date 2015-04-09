@@ -40,9 +40,9 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION","0.84+1.0");
+define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION","0.84+1.1");
 
-// Init the hooks of adipsite
+// Init the hooks
 function plugin_init_solvecloseticketaction() {
    global $PLUGIN_HOOKS;
 
@@ -54,10 +54,6 @@ function plugin_init_solvecloseticketaction() {
            array('addtabon' => array('Entity')));
 
       if (isset($_SESSION["glpiID"])) {
-
-         // Tabs for each type
-//         $PLUGIN_HOOKS['headings']['solvecloseticketaction'] = 'plugin_get_headings_solvecloseticketaction';
-//         $PLUGIN_HOOKS['headings_action']['solvecloseticketaction'] = 'plugin_headings_actions_solvecloseticketaction';
 
          $PLUGIN_HOOKS['pre_item_update']['solvecloseticketaction'] = array(
             'Ticket'           => array('PluginSolvecloseticketactionConfig', 'updateTicket')
