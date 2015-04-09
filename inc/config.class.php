@@ -255,7 +255,6 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
          $createfollow = $psConfig->getValue("createfollowupwithsolve", $entities_id);
          $assigntech = $psConfig->getValue("assigntechsolveticket", $entities_id);
          $deletetechsonsolve = $psConfig->getValue("deletetechsonsolve", $entities_id);
-         Toolbox::logDebug($deletetechsonsolve);
          if ($createfollow == '1'
                  && isset($item->input['solution'])) {
             $input = array();
