@@ -43,20 +43,32 @@
 function plugin_solvecloseticketaction_install() {
    global $DB;
 
-   $query = "CREATE TABLE IF NOT EXISTS `glpi_plugin_solvecloseticketaction_configs` (
-   `id` int(11) NOT NULL AUTO_INCREMENT,
-   `entities_id` int(11) NOT NULL DEFAULT '0',
-   `createfollowupwithsolve` varchar(255) DEFAULT NULL,
-   `assigntechsolveticket` varchar(255) DEFAULT NULL,
-   `deletetechsonsolve` varchar(255) DEFAULT NULL,
-   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-   $DB->query($query);
-
-   $query = "INSERT INTO `glpi_plugin_solvecloseticketaction_configs`
-      (`id`, `entities_id`, `createfollowupwithsolve`, `assigntechsolveticket`)
-      VALUES (1, 0, '0', '0', '0');";
-   $DB->query($query);
+   if (!TableExists('glpi_plugin_solvecloseticketaction_configs')) {
+      $query = "CREATE TABLE `glpi_plugin_solvecloseticketaction_configs` (
+         `id` int(11) NOT NULL AUTO_INCREMENT,
+         `entities_id` int(11) NOT NULL DEFAULT '0',
+         `createfollowupwithsolve` varchar(255) DEFAULT NULL,
+         `assigntechsolveticket` varchar(255) DEFAULT NULL,
+         `deletetechsonsolve` varchar(255) DEFAULT NULL,
+         `assigntechsolveticketempty` varchar(255) DEFAULT NULL,
+         PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+      $DB->query($query);
+      $query = "INSERT INTO `glpi_plugin_solvecloseticketaction_configs`
+         (`id`, `entities_id`, `createfollowupwithsolve`, `assigntechsolveticket`)
+         VALUES (1, 0, '0', '0', '0');";
+      $DB->query($query);
+   } else {
+      if (!FieldExists('glpi_plugin_solvecloseticketaction_configs', '')) {
+         $migration = new Migration(PLUGIN_SOLVECLOSETICKETACTION_VERSION);
+         $migration->addField(
+                 'glpi_plugin_solvecloseticketaction_configs',
+                 'assigntechsolveticketempty',
+                 'string',
+                 array('value' => '0'));
+         $migration->executeMigration();
+      }
+   }
 
    return true;
 }

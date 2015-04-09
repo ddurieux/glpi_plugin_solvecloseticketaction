@@ -135,7 +135,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       $value = str_replace("++", "+", $value);
       Dropdown::showFromArray("createfollowupwithsolve", $elements, array('value' => $value));
       echo "</td>";
-      echo "<td>Assigner le ticket au technicien qui résoud le ticket&nbsp;:</td>";
+      echo "<td>Assigner le ticket au technicien qui résoud le ticket (tout le temps)&nbsp;:</td>";
       echo "<td>";
       $elements = array();
       if ($entities_id == '0') {
@@ -175,6 +175,28 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       Dropdown::showFromArray("deletetechsonsolve", $elements, array('value' => $value));
       echo "</td>";
       echo "</tr>";
+
+      echo "<tr>";
+      echo "<td colspan='2'></td>";
+      echo "<td>Assigner le ticket au technicien qui résoud le ticket (si aucun technicien sur le ticket)&nbsp;:</td>";
+      echo "<td>";
+      $elements = array();
+      if ($entities_id == '0') {
+         $elements = array("+0" => __('No'),
+                           "+1" => __('Yes')
+                           );
+      } else {
+         $elements = array("NULL" => __('Inheritance of the parent entity'),
+                           "+0" => __('No'),
+                           "+1" => __('Yes')
+                           );
+      }
+      $value = (is_null($this->fields['assigntechsolveticketempty']) ? "NULL" : "+".$this->fields['assigntechsolveticketempty']);
+      $value = str_replace("++", "+", $value);
+      Dropdown::showFromArray("assigntechsolveticketempty", $elements, array('value' => $value));
+      echo "</td>";
+      echo "</tr>";
+
 
       $this->showFormButtons($options);
 
@@ -254,6 +276,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
          }
          $createfollow = $psConfig->getValue("createfollowupwithsolve", $entities_id);
          $assigntech = $psConfig->getValue("assigntechsolveticket", $entities_id);
+         $assigntechempty = $psConfig->getValue("assigntechsolveticketempty", $entities_id);
          $deletetechsonsolve = $psConfig->getValue("deletetechsonsolve", $entities_id);
          if ($createfollow == '1'
                  && isset($item->input['solution'])) {
@@ -281,6 +304,17 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
                }
             }
             if ($create == '1') {
+               $input = array();
+               $input['tickets_id'] = $item->input['id'];
+               $input['users_id'] = $_SESSION['glpiID'];
+               $input['type'] = '2';
+               $ticket_User->add($input);
+            }
+         } else if ($assigntechempty == '1') {
+            $ticket_User = new Ticket_User();
+            $a_users = $ticket_User->find("`tickets_id`='".$item->input['id']."'
+                                           AND `type`='2'");
+            if (count($a_users) == 0) {
                $input = array();
                $input['tickets_id'] = $item->input['id'];
                $input['users_id'] = $_SESSION['glpiID'];
