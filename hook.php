@@ -55,8 +55,8 @@ function plugin_solvecloseticketaction_install() {
       ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
       $DB->query($query);
       $query = "INSERT INTO `glpi_plugin_solvecloseticketaction_configs`
-         (`id`, `entities_id`, `createfollowupwithsolve`, `assigntechsolveticket`)
-         VALUES (1, 0, '0', '0', '0');";
+         (`id`, `entities_id`, `createfollowupwithsolve`, `assigntechsolveticket`, `deletetechsonsolve`, `assigntechsolveticketempty`)
+         VALUES (1, 0, '0', '0', '0', '0');";
       $DB->query($query);
    } else {
       if (!FieldExists('glpi_plugin_solvecloseticketaction_configs', '')) {

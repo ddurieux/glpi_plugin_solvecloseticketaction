@@ -232,7 +232,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
             return $data[$name];
          }
       }
-      return $config->getField($name);
+      return '0';
    }
 
 

@@ -46,12 +46,15 @@ include (GLPI_ROOT . "/inc/includes.php");
 Session::checkRight("entity","w");
 
 Html::header("solvecloseticketaction",$_SERVER["PHP_SELF"], "plugins", "solvecloseticketaction", "entity");
-
 $psConfig = new PluginSolvecloseticketactionConfig();
 if (        isset($_POST['createfollowupwithsolve'])
         AND $_POST['createfollowupwithsolve'] == 'NULL'
         AND isset($_POST['assigntechsolveticket'])
         AND $_POST['assigntechsolveticket'] == 'NULL'
+        AND isset($_POST['deletetechsonsolve'])
+        AND $_POST['deletetechsonsolve'] == 'NULL'
+        AND isset($_POST['assigntechsolveticketempty'])
+        AND $_POST['assigntechsolveticketempty'] == 'NULL'
         ) {
    Html::back();
 }
