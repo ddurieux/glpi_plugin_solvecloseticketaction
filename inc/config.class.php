@@ -5,7 +5,7 @@
    Plugin Solvecloseticketaction for GLPI
    Copyright (C) 2014-2015 by the Plugin Solvecloseticketaction for David Durieux.
 
-   https://
+   https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    ------------------------------------------------------------------------
 
    LICENSE
@@ -34,7 +34,7 @@
    @copyright Copyright (c) 2014-2015 Plugin Solvecloseticketaction for David Durieux
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://
+   @link      https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    @since     2014
 
    ------------------------------------------------------------------------
@@ -46,6 +46,8 @@ if (!defined('GLPI_ROOT')) {
 
 class PluginSolvecloseticketactionConfig extends CommonDBTM {
 
+   static $rightname              = 'config';
+
    /**
    * Get name of this type
    *
@@ -53,19 +55,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
    *
    **/
    static function getTypeName($nb=0) {
-      return "configuration";
-   }
-
-
-
-   static function canCreate() {
-      return true;
-   }
-
-
-
-   static function canView() {
-      return true;
+      return "entity";
    }
 
 
@@ -119,7 +109,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       echo "<input type='hidden' name='entities_id' value='".$entities_id."' />";
       echo "Créer un suivi avec la solution&nbsp;:";
       echo "</td>";
-      echo "<td>";
+      echo "<td width='100'>";
       $elements = array();
       if ($entities_id == '0') {
          $elements = array("+0" => __('No'),
@@ -136,7 +126,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       Dropdown::showFromArray("createfollowupwithsolve", $elements, array('value' => $value));
       echo "</td>";
       echo "<td>Assigner le ticket au technicien qui résoud le ticket (tout le temps)&nbsp;:</td>";
-      echo "<td>";
+      echo "<td width='100'>";
       $elements = array();
       if ($entities_id == '0') {
          $elements = array("+0" => __('No'),

@@ -5,7 +5,7 @@
    Plugin Solvecloseticketaction for GLPI
    Copyright (C) 2014-2015 by the Plugin Solvecloseticketaction for David Durieux.
 
-   https://
+   https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    ------------------------------------------------------------------------
 
    LICENSE
@@ -34,7 +34,7 @@
    @copyright Copyright (c) 2014-2015 Plugin Solvecloseticketaction for David Durieux
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://
+   @link      https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    @since     2014
 
    ------------------------------------------------------------------------

@@ -5,7 +5,7 @@
    Plugin Solvecloseticketaction for GLPI
    Copyright (C) 2014-2015 by the Plugin Solvecloseticketaction for David Durieux.
 
-   https://
+   https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    ------------------------------------------------------------------------
 
    LICENSE
@@ -34,13 +34,13 @@
    @copyright Copyright (c) 2014-2015 Plugin Solvecloseticketaction for David Durieux
    @license   AGPL License 3.0 or (at your option) any later version
               http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   @link      https://
+   @link      https://github.com/ddurieux/glpi_plugin_solvecloseticketaction
    @since     2014
 
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION","0.84+1.1");
+define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION","0.85+1.0");
 
 // Init the hooks
 function plugin_init_solvecloseticketaction() {
@@ -71,7 +71,7 @@ function plugin_version_solvecloseticketaction() {
                 'license'        => 'AGPLv3+',
                 'author'         =>'<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a>',
                 'homepage'       =>'https://github.com/ddurieux/glpi_plugin_solvecloseticketaction',
-                'minGlpiVersion' => '0.84'
+                'minGlpiVersion' => '0.85'
    );
 }
 
@@ -79,7 +79,7 @@ function plugin_version_solvecloseticketaction() {
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_solvecloseticketaction_check_prerequisites() {
 
-   if (version_compare(GLPI_VERSION,'0.84','lt') || version_compare(GLPI_VERSION,'0.85','ge')) {
+   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.91','ge')) {
       echo "error";
    } else {
       return true;
