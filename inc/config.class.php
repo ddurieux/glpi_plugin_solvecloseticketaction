@@ -195,7 +195,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
 
 
 
-/**
+   /**
     * Get value of config
     *
     * @global object $DB
@@ -259,7 +259,9 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
 
       if (isset($item->input['solution'])
               OR (isset($item->input['status'])
-                  AND $item->input['status'] == 'closed')) {
+                  AND $item->input['status'] == CommonITILObject::CLOSED)
+              OR (isset($item->input['status'])
+                  AND $item->input['status'] == CommonITILObject::SOLVED)) {
          $entities_id = $item->fields['entities_id'];
          if (isset($item->input['entities_id'])) {
             $entities_id = $item->input['entities_id'];
