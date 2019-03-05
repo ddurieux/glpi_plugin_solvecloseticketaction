@@ -54,15 +54,15 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
    *@return text name of this type by language of the user connected
    *
    **/
-   static function getTypeName($nb=0) {
+   static function getTypeName($nb = 0) {
       return "entity";
    }
 
 
 
-   function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
+   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
 
-      $array_ret = array();
+      $array_ret = [];
       if ($item->getID() > -1) {
          $array_ret[0] = self::createTabEntry('solvecloseticketaction');
       }
@@ -71,7 +71,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
 
 
 
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
 
       if ($item->getID() > -1) {
          $prConfig = new PluginSolvecloseticketactionConfig();
@@ -91,10 +91,11 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
    *@return bool true if form is ok
    *
    **/
-   function showForm($entities_id, $options=array(), $copy=array()) {
-      global $DB,$CFG_GLPI;
+   function showForm($entities_id, $options = [], $copy = []) {
+      global $DB, $CFG_GLPI;
 
-      $a_configs = $this->find("`entities_id`='".$entities_id."'", "", 1);
+      $a_configs = $this->find(['entities_id' => $entities_id], [], 1);
+
       if (count($a_configs) == '1') {
          $a_config = current($a_configs);
          $this->getFromDB($a_config['id']);
@@ -110,37 +111,41 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       echo "Créer un suivi avec la solution&nbsp;:";
       echo "</td>";
       echo "<td width='100'>";
-      $elements = array();
+      $elements = [];
       if ($entities_id == '0') {
-         $elements = array("+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            '+0' => __('No'),
+            '+1' => __('Yes')
+         ];
       } else {
-         $elements = array("NULL" => __('Inheritance of the parent entity'),
-                           "+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            'NULL' => __('Inheritance of the parent entity'),
+            '+0'   => __('No'),
+            '+1'   => __('Yes')
+         ];
       }
       $value = (is_null($this->fields['createfollowupwithsolve']) ? "NULL" : "+".$this->fields['createfollowupwithsolve']);
       $value = str_replace("++", "+", $value);
-      Dropdown::showFromArray("createfollowupwithsolve", $elements, array('value' => $value));
+      Dropdown::showFromArray("createfollowupwithsolve", $elements, ['value' => $value]);
       echo "</td>";
       echo "<td>Assigner le ticket au technicien qui résoud le ticket (tout le temps)&nbsp;:</td>";
       echo "<td width='100'>";
-      $elements = array();
+      $elements = [];
       if ($entities_id == '0') {
-         $elements = array("+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            '+0' => __('No'),
+            '+1' => __('Yes')
+         ];
       } else {
-         $elements = array("NULL" => __('Inheritance of the parent entity'),
-                           "+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            'NULL' => __('Inheritance of the parent entity'),
+            '+0'   => __('No'),
+            '+1'   => __('Yes')
+         ];
       }
       $value = (is_null($this->fields['assigntechsolveticket']) ? "NULL" : "+".$this->fields['assigntechsolveticket']);
       $value = str_replace("++", "+", $value);
-      Dropdown::showFromArray("assigntechsolveticket", $elements, array('value' => $value));
+      Dropdown::showFromArray("assigntechsolveticket", $elements, ['value' => $value]);
       echo "</td>";
       echo "</tr>";
 
@@ -149,20 +154,22 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       echo "</td>";
       echo "<td>Supprimer les autres techniciens lorsque le technicien résoud le ticket&nbsp;:</td>";
       echo "<td>";
-      $elements = array();
+      $elements = [];
       if ($entities_id == '0') {
-         $elements = array("+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            '+0' => __('No'),
+            '+1' => __('Yes')
+         ];
       } else {
-         $elements = array("NULL" => __('Inheritance of the parent entity'),
-                           "+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            'NULL' => __('Inheritance of the parent entity'),
+            '+0'   => __('No'),
+            '+1'   => __('Yes')
+         ];
       }
       $value = (is_null($this->fields['deletetechsonsolve']) ? "NULL" : "+".$this->fields['deletetechsonsolve']);
       $value = str_replace("++", "+", $value);
-      Dropdown::showFromArray("deletetechsonsolve", $elements, array('value' => $value));
+      Dropdown::showFromArray("deletetechsonsolve", $elements, ['value' => $value]);
       echo "</td>";
       echo "</tr>";
 
@@ -170,23 +177,24 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
       echo "<td colspan='2'></td>";
       echo "<td>Assigner le ticket au technicien qui résoud le ticket (si aucun technicien sur le ticket)&nbsp;:</td>";
       echo "<td>";
-      $elements = array();
+      $elements = [];
       if ($entities_id == '0') {
-         $elements = array("+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            '+0' => __('No'),
+            '+1' => __('Yes')
+         ];
       } else {
-         $elements = array("NULL" => __('Inheritance of the parent entity'),
-                           "+0" => __('No'),
-                           "+1" => __('Yes')
-                           );
+         $elements = [
+            'NULL' => __('Inheritance of the parent entity'),
+            '+0'   => __('No'),
+            '+1'   => __('Yes')
+         ];
       }
       $value = (is_null($this->fields['assigntechsolveticketempty']) ? "NULL" : "+".$this->fields['assigntechsolveticketempty']);
       $value = str_replace("++", "+", $value);
-      Dropdown::showFromArray("assigntechsolveticketempty", $elements, array('value' => $value));
+      Dropdown::showFromArray("assigntechsolveticketempty", $elements, ['value' => $value]);
       echo "</td>";
       echo "</tr>";
-
 
       $this->showFormButtons($options);
 
@@ -272,19 +280,21 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
          $deletetechsonsolve = $psConfig->getValue("deletetechsonsolve", $entities_id);
          if ($createfollow == '1'
                  && isset($item->input['solution'])) {
-            $input = array();
+            $input = [];
             $input['tickets_id'] = $item->input['id'];
             $input['date'] = date('Y-m-d H:i:s');
             $input['users_id'] = $_SESSION['glpiID'];
             $input['content'] = "Solution : ".Html::clean(Html::entity_decode_deep($item->input['solution']));
             $ticketFollowup = new TicketFollowup();
-            $input['_no_notif'] = True;
+            $input['_no_notif'] = true;
             $ticketFollowup->add($input);
          }
          if ($assigntech == '1') {
             $ticket_User = new Ticket_User();
-            $a_users = $ticket_User->find("`tickets_id`='".$item->input['id']."'
-                                           AND `type`='2'");
+            $a_users = $ticket_User->find([
+               'tickets_id' => $item->input['id'],
+               'type'       => 2
+            ]);
             $create = 1;
             foreach ($a_users as $datau) {
                if ($datau['users_id'] == $_SESSION['glpiID']) {
@@ -296,7 +306,7 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
                }
             }
             if ($create == '1') {
-               $input = array();
+               $input = [];
                $input['tickets_id'] = $item->input['id'];
                $input['users_id'] = $_SESSION['glpiID'];
                $input['type'] = '2';
@@ -304,10 +314,12 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
             }
          } else if ($assigntechempty == '1') {
             $ticket_User = new Ticket_User();
-            $a_users = $ticket_User->find("`tickets_id`='".$item->input['id']."'
-                                           AND `type`='2'");
+            $a_users = $ticket_User->find([
+               'tickets_id' => $item->input['id'],
+               'type'       => 2
+            ]);
             if (count($a_users) == 0) {
-               $input = array();
+               $input = [];
                $input['tickets_id'] = $item->input['id'];
                $input['users_id'] = $_SESSION['glpiID'];
                $input['type'] = '2';
@@ -316,7 +328,4 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
          }
       }
    }
-
 }
-
-?>

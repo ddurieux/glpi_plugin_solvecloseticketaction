@@ -43,7 +43,7 @@
 function plugin_solvecloseticketaction_install() {
    global $DB;
 
-   if (!TableExists('glpi_plugin_solvecloseticketaction_configs')) {
+   if (!$DB->tableExists('glpi_plugin_solvecloseticketaction_configs')) {
       $query = "CREATE TABLE `glpi_plugin_solvecloseticketaction_configs` (
          `id` int(11) NOT NULL AUTO_INCREMENT,
          `entities_id` int(11) NOT NULL DEFAULT '0',
@@ -59,13 +59,13 @@ function plugin_solvecloseticketaction_install() {
          VALUES (1, 0, '0', '0', '0', '0');";
       $DB->query($query);
    } else {
-      if (!FieldExists('glpi_plugin_solvecloseticketaction_configs', '')) {
+      if (!$DB->fieldExists('glpi_plugin_solvecloseticketaction_configs', '')) {
          $migration = new Migration(PLUGIN_SOLVECLOSETICKETACTION_VERSION);
          $migration->addField(
                  'glpi_plugin_solvecloseticketaction_configs',
                  'assigntechsolveticketempty',
                  'string',
-                 array('value' => '0'));
+                 ['value' => '0']);
          $migration->executeMigration();
       }
    }
@@ -86,13 +86,12 @@ function plugin_solvecloseticketaction_uninstall() {
 
 
 // Define headings added by the plugin //
-function plugin_get_headings_solvecloseticketaction($item,$withtemplate) {
-   global $LANG;
+function plugin_get_headings_solvecloseticketaction($item, $withtemplate) {
 
    switch (get_class($item)) {
 
       case 'Entity':
-         $array = array();
+         $array = [];
          if ($item->getID() > 0) {
             if (Session::haveRight("entity", 'r')) {
                $array[0] = "Action de ticket (résolution)";
@@ -112,7 +111,7 @@ function plugin_headings_actions_solvecloseticketaction($item) {
    switch (get_class($item)) {
 
       case 'Entity':
-         $array = array();
+         $array = [];
          $array[0] = "plugin_headings_solvecloseticketaction_config";
          return $array;
          break;
@@ -128,4 +127,3 @@ function plugin_headings_solvecloseticketaction_config($item) {
    $prConfig->showForm($item->getID());
 }
 
-?>

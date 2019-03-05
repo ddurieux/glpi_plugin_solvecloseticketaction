@@ -40,7 +40,7 @@
    ------------------------------------------------------------------------
  */
 
-define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION","0.85+1.0");
+define ("PLUGIN_SOLVECLOSETICKETACTION_VERSION", "9.4+1.0");
 
 // Init the hooks
 function plugin_init_solvecloseticketaction() {
@@ -51,13 +51,13 @@ function plugin_init_solvecloseticketaction() {
    $Plugin = new Plugin();
    if ($Plugin->isActivated('solvecloseticketaction')) {
       Plugin::registerClass('PluginSolvecloseticketactionConfig',
-           array('addtabon' => array('Entity')));
+           ['addtabon' => ['Entity']]);
 
       if (isset($_SESSION["glpiID"])) {
 
-         $PLUGIN_HOOKS['pre_item_update']['solvecloseticketaction'] = array(
-            'Ticket'           => array('PluginSolvecloseticketactionConfig', 'updateTicket')
-         );
+         $PLUGIN_HOOKS['pre_item_update']['solvecloseticketaction'] = [
+            'Ticket' => ['PluginSolvecloseticketactionConfig', 'updateTicket']
+         ];
       }
    }
    return $PLUGIN_HOOKS;
@@ -65,21 +65,22 @@ function plugin_init_solvecloseticketaction() {
 
 // Name and Version of the plugin
 function plugin_version_solvecloseticketaction() {
-   return array('name'           => 'solvecloseticketaction',
-                'shortname'      => 'solvecloseticketaction',
-                'version'        => PLUGIN_SOLVECLOSETICKETACTION_VERSION,
-                'license'        => 'AGPLv3+',
-                'author'         =>'<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a>',
-                'homepage'       =>'https://github.com/ddurieux/glpi_plugin_solvecloseticketaction',
-                'minGlpiVersion' => '0.85'
-   );
+   return [
+      'name'           => 'solvecloseticketaction',
+      'shortname'      => 'solvecloseticketaction',
+      'version'        => PLUGIN_SOLVECLOSETICKETACTION_VERSION,
+      'license'        => 'AGPLv3+',
+      'author'         =>'<a href="mailto:d.durieux@siprossii.com">David DURIEUX</a>',
+      'homepage'       =>'https://github.com/ddurieux/glpi_plugin_solvecloseticketaction',
+      'minGlpiVersion' => '9.4'
+   ];
 }
 
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_solvecloseticketaction_check_prerequisites() {
 
-   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.91','ge')) {
+   if (version_compare(GLPI_VERSION, '9.4', 'lt') || version_compare(GLPI_VERSION, '9.5', 'ge')) {
       echo "error";
    } else {
       return true;
@@ -90,8 +91,6 @@ function plugin_solvecloseticketaction_check_config() {
    return true;
 }
 
-function plugin_solvecloseticketaction_haveTypeRight($type,$right) {
+function plugin_solvecloseticketaction_haveTypeRight($type, $right) {
    return true;
 }
-
-?>

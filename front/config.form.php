@@ -45,9 +45,9 @@ include (GLPI_ROOT . "/inc/includes.php");
 
 Session::checkRight("entity", UPDATE);
 
-Html::header("solvecloseticketaction",$_SERVER["PHP_SELF"], "plugins", "solvecloseticketaction", "entity");
+Html::header("solvecloseticketaction", $_SERVER["PHP_SELF"], "plugins", "solvecloseticketaction", "entity");
 $psConfig = new PluginSolvecloseticketactionConfig();
-if (        isset($_POST['createfollowupwithsolve'])
+if (isset($_POST['createfollowupwithsolve'])
         AND $_POST['createfollowupwithsolve'] == 'NULL'
         AND isset($_POST['assigntechsolveticket'])
         AND $_POST['assigntechsolveticket'] == 'NULL'
@@ -70,5 +70,3 @@ if (isset ($_POST["add"])) {
 }
 
 Html::footer();
-
-?>
