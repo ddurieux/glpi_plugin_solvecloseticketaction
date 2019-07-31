@@ -287,6 +287,8 @@ class PluginSolvecloseticketactionConfig extends CommonDBTM {
             $input['content'] = "Solution : ".Html::clean(Html::entity_decode_deep($item->input['solution']));
             $ticketFollowup = new TicketFollowup();
             $input['_no_notif'] = true;
+            $input['itemtype'] = 'Ticket';
+            $input['items_id'] = $item->input['id'];
             $ticketFollowup->add($input);
          }
          if ($assigntech == '1') {
